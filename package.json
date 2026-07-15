@@ -1,0 +1,14 @@
+{
+  "name": "daemon",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "daemon-api",
+    "daemon-ui",
+    "daemon-desktop"
+  ],
+  "scripts": {
+    "dev": "echo Starting Daemon...",
+    "install:all": "npm install --workspaces"
+  }
+}

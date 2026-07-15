@@ -1,0 +1,35 @@
+# Node
+node_modules/
+
+# Environment
+.env
+.env.*
+
+# Logs
+*.log
+
+# Build
+dist/
+build/
+
+# Electron
+out/
+release/
+
+# Storage
+daemon-storage/uploads/*
+daemon-storage/vector-db/*
+daemon-storage/logs/*
+
+# Keep folders
+!daemon-storage/uploads/.gitkeep
+!daemon-storage/vector-db/.gitkeep
+!daemon-storage/logs/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.idea/
