@@ -10,5 +10,9 @@
   "scripts": {
     "dev": "echo Starting Daemon...",
     "install:all": "npm install --workspaces"
+  },
+  "dependencies": {
+    "@angular/cdk": "^22.0.4",
+    "@angular/material": "^22.0.4"
   }
 }

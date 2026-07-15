@@ -1,0 +1,33 @@
+<aside class="d-sidebar">
+  <div class="d-brand">
+    <div class="d-brand-mark">D</div>
+    <div class="d-brand-copy">
+      <span class="d-brand-title">Daemon</span>
+      <span class="d-brand-subtitle">Local AI Suite</span>
+    </div>
+  </div>
+
+  <nav class="d-nav">
+    <a
+      *ngFor="let item of navItems"
+      class="d-nav-link"
+      [routerLink]="item.route"
+      routerLinkActive="d-nav-link-active"
+      [routerLinkActiveOptions]="{ exact: false }"
+    >
+     <span class="material-symbols-outlined">
+  {{ item.icon }}
+</span>
+      <span>{{ item.label }}</span>
+    </a>
+  </nav>
+
+  <div class="d-sidebar-footer">
+    <div class="d-sidebar-pill">
+      <span class="material-symbols-outlined">
+bolt
+</span>
+      <span>Ready</span>
+    </div>
+  </div>
+</aside>
