@@ -1,7 +1,6 @@
 <section class="d-panel">
 
   <div class="d-panel-header">
-
     <div>
       <p class="d-eyebrow">Projects</p>
       <h1>Project Workspace</h1>
@@ -13,11 +12,9 @@
     <button class="d-primary-btn">
       + New Project
     </button>
-
   </div>
 
   <div class="d-stats-grid">
-
     <div class="d-stat-card">
       <h2>{{ totalProjects }}</h2>
       <p>Total</p>
@@ -37,92 +34,47 @@
       <h2>{{ pausedProjects }}</h2>
       <p>Paused</p>
     </div>
-
   </div>
 
   <div class="d-search-box">
-
-    <span class="material-symbols-outlined">
-      search
-    </span>
+    <span class="material-symbols-outlined">search</span>
 
     <input
       type="text"
       placeholder="Search Projects..."
-    >
-
+    />
   </div>
 
-  @if(projects.length === 0){
+  <h3>Projects Loaded : {{ projects.length }}</h3>
 
-    <div class="d-empty-state">
+  <div class="d-card-grid">
 
-      <div class="d-empty-illustration">
+    @for (project of projects; track $index) {
 
-        <span class="material-symbols-outlined">
-          folder_open
-        </span>
+      <article class="d-card">
 
-      </div>
+        <div class="d-empty-illustration">
+          <span class="material-symbols-outlined">
+            folder
+          </span>
+        </div>
 
-      <h2>No Projects Yet</h2>
+        <h3>{{ project.name }}</h3>
 
-      <p>
-        Create your first development workspace.
-      </p>
+        <p>{{ project.description }}</p>
 
-    </div>
+        <div class="d-chip">
+          {{ project.status }}
+        </div>
 
-  }
+        <small>
+          {{ project.createdAt | date:'dd MMM yyyy' }}
+        </small>
 
-  @else {
+      </article>
 
-    <div class="d-card-grid">
+    }
 
-      @for(project of projects; track project._id){
-
-        <article class="d-card">
-
-          <div class="d-empty-illustration">
-
-            <span class="material-symbols-outlined">
-              folder
-            </span>
-
-          </div>
-
-          <h3>{{project.name}}</h3>
-
-          <p>{{project.description}}</p>
-
-          <div class="d-chip">
-            {{project.status}}
-          </div>
-
-          <small>
-
-            Created
-
-            {{project.createdAt | date:'dd MMM yyyy'}}
-
-          </small>
-
-          <div class="d-card-actions">
-
-            <button>Open</button>
-
-            <button>Edit</button>
-
-            <button>Delete</button>
-
-          </div>
-
-        </article>
-
-      }
-
-    </div>
-
-  }
+  </div>
 
 </section>

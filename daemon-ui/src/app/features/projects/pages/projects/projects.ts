@@ -1,17 +1,18 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 
 import { Project } from '../../../../core/models/project.model';
 import { ProjectService } from '../../../../core/services/project.service';
 
+import { CommonModule, DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [DatePipe],
+  imports: [CommonModule, DatePipe],
   templateUrl: './projects.html',
 })
 export class ProjectsComponent implements OnInit {
-
+private cdr = inject(ChangeDetectorRef);
   private projectService = inject(ProjectService);
 
   projects: Project[] = [];
@@ -27,29 +28,40 @@ export class ProjectsComponent implements OnInit {
 
   loadProjects() {
 
-    this.projectService.getProjects().subscribe({
+  console.log("Loading Projects...");
 
-      next: (response) => {
+  this.projectService.getProjects().subscribe({
 
-        this.projects = response.data.projects;
+    next: (response: any) => {
 
-        this.totalProjects = this.projects.length;
+      console.log("Response:", response);
 
-        this.activeProjects =
-          this.projects.filter(p => p.status === 'Active').length;
+      this.projects = response.data.projects;
+this.cdr.detectChanges();
+      console.log("Projects:", this.projects);
 
-        this.completedProjects =
-          this.projects.filter(p => p.status === 'Completed').length;
+      this.totalProjects = this.projects.length;
 
-        this.pausedProjects =
-          this.projects.filter(p => p.status === 'Paused').length;
+      this.activeProjects =
+        this.projects.filter(p => p.status === 'Active').length;
 
-      },
+      this.completedProjects =
+        this.projects.filter(p => p.status === 'Completed').length;
 
-      error: (error) => console.error(error)
+      this.pausedProjects =
+        this.projects.filter(p => p.status === 'Paused').length;
 
-    });
+      console.log("Finished Loading");
 
-  }
+    },
 
+    error: (err) => {
+
+      console.error("API ERROR", err);
+
+    }
+
+  });
+
+}
 }
