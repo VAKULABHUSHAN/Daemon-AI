@@ -1,80 +1,83 @@
 <section class="d-panel">
-
-  <div class="d-panel-header">
-    <div>
-      <p class="d-eyebrow">Projects</p>
-      <h1>Project Workspace</h1>
-      <p class="d-panel-description">
-        Manage all your local development workspaces.
-      </p>
+  
+  <!-- Combined Top Bar Header -->
+  <header class="d-panel-header">
+    <div class="d-header-titles">
+      <span class="d-eyebrow">Projects</span>
+      <h1 class="d-panel-title">Project Workspace</h1>
+      <p class="d-panel-description">Manage all your local development workspaces.</p>
     </div>
 
-    <button class="d-primary-btn">
-      + New Project
-    </button>
+    <div class="d-header-actions">
+      <!-- Search Input inline with actions -->
+      <div class="d-search-box">
+        <span class="material-symbols-outlined d-search-icon">search</span>
+        <input type="text" placeholder="Search Projects..." />
+      </div>
+
+      <button class="d-btn-primary" type="button">
+        <span class="material-symbols-outlined">add</span>
+        New Project
+      </button>
+    </div>
+  </header>
+
+  <!-- Horizontal Stats Toolbar -->
+  <div class="d-stats-bar">
+    <div class="d-stat-item">
+      <span class="d-stat-label">Total</span>
+      <strong class="d-stat-value">{{ totalProjects }}</strong>
+    </div>
+    <div class="d-stat-divider"></div>
+
+    <div class="d-stat-item">
+      <span class="d-stat-label">Active</span>
+      <strong class="d-stat-value d-status-active">{{ activeProjects }}</strong>
+    </div>
+    <div class="d-stat-divider"></div>
+
+    <div class="d-stat-item">
+      <span class="d-stat-label">Completed</span>
+      <strong class="d-stat-value d-status-completed">{{ completedProjects }}</strong>
+    </div>
+    <div class="d-stat-divider"></div>
+
+    <div class="d-stat-item">
+      <span class="d-stat-label">Paused</span>
+      <strong class="d-stat-value d-status-paused">{{ pausedProjects }}</strong>
+    </div>
+
+    <div class="d-stats-counter">
+      Projects Loaded: <strong>{{ projects.length }}</strong>
+    </div>
   </div>
 
-  <div class="d-stats-grid">
-    <div class="d-stat-card">
-      <h2>{{ totalProjects }}</h2>
-      <p>Total</p>
-    </div>
-
-    <div class="d-stat-card">
-      <h2>{{ activeProjects }}</h2>
-      <p>Active</p>
-    </div>
-
-    <div class="d-stat-card">
-      <h2>{{ completedProjects }}</h2>
-      <p>Completed</p>
-    </div>
-
-    <div class="d-stat-card">
-      <h2>{{ pausedProjects }}</h2>
-      <p>Paused</p>
-    </div>
-  </div>
-
-  <div class="d-search-box">
-    <span class="material-symbols-outlined">search</span>
-
-    <input
-      type="text"
-      placeholder="Search Projects..."
-    />
-  </div>
-
-  <h3>Projects Loaded : {{ projects.length }}</h3>
-
+  <!-- Dynamic Project Cards Grid -->
   <div class="d-card-grid">
-
     @for (project of projects; track $index) {
-
       <article class="d-card">
-
-        <div class="d-empty-illustration">
-          <span class="material-symbols-outlined">
-            folder
-          </span>
+        
+        <div class="d-card-main">
+          <div class="d-icon-wrapper">
+            <span class="material-symbols-outlined">folder</span>
+          </div>
+          
+          <div class="d-card-details">
+            <div class="d-card-title-row">
+              <h3 class="d-card-title">{{ project.name }}</h3>
+              <span class="d-chip">{{ project.status }}</span>
+            </div>
+            <p class="d-card-description">{{ project.description }}</p>
+          </div>
         </div>
 
-        <h3>{{ project.name }}</h3>
-
-        <p>{{ project.description }}</p>
-
-        <div class="d-chip">
-          {{ project.status }}
+        <div class="d-card-footer">
+          <span class="material-symbols-outlined d-date-icon">calendar_today</span>
+          <small class="d-card-date">{{ project.createdAt | date:'dd MMM yyyy' }}</small>
         </div>
-
-        <small>
-          {{ project.createdAt | date:'dd MMM yyyy' }}
-        </small>
 
       </article>
-
     }
-
   </div>
 
 </section>
