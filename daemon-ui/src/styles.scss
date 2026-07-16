@@ -368,3 +368,77 @@ input {
   margin-left: 4px;
   color: var(--d-secondary);
 }
+.d-panel-description {
+  color: var(--d-secondary);
+  margin-top: 8px;
+}
+
+.d-primary-btn {
+  background: var(--d-primary);
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.d-primary-btn:hover {
+  opacity: .9;
+}
+
+.d-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.d-stat-card {
+  padding:20px;
+  border-radius:18px;
+  background:rgba(15,23,42,.55);
+  border:1px solid var(--d-border);
+}
+
+.d-stat-card h2{
+  margin:0;
+  font-size:2rem;
+}
+
+.d-stat-card p{
+  margin-top:8px;
+  color:var(--d-secondary);
+}
+
+.d-search-box{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 18px;
+  margin-bottom:24px;
+  border-radius:14px;
+  background:rgba(15,23,42,.5);
+  border:1px solid var(--d-border);
+}
+
+.d-search-box input{
+  flex:1;
+  border:none;
+  outline:none;
+  background:transparent;
+  color:white;
+}
+
+.d-card-actions{
+  display:flex;
+  justify-content:space-between;
+  margin-top:16px;
+}
+
+.d-card-actions button{
+  background:none;
+  border:none;
+  color:var(--d-primary);
+  cursor:pointer;
+}
