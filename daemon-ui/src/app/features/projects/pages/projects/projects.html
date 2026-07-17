@@ -1,83 +1,315 @@
 <section class="d-panel">
-  
-  <!-- Combined Top Bar Header -->
+
+  <!-- ===========================
+       Header
+  ============================ -->
+
   <header class="d-panel-header">
+
     <div class="d-header-titles">
       <span class="d-eyebrow">Projects</span>
-      <h1 class="d-panel-title">Project Workspace</h1>
-      <p class="d-panel-description">Manage all your local development workspaces.</p>
+
+      <h1 class="d-panel-title">
+        Project Workspace
+      </h1>
+
+      <p class="d-panel-description">
+        Manage all your local development workspaces.
+      </p>
     </div>
 
     <div class="d-header-actions">
-      <!-- Search Input inline with actions -->
+
       <div class="d-search-box">
-        <span class="material-symbols-outlined d-search-icon">search</span>
-        <input type="text" placeholder="Search Projects..." />
+
+        <span class="material-symbols-outlined d-search-icon">
+          search
+        </span>
+
+        <input
+          type="text"
+          placeholder="Search Projects..." />
+
       </div>
 
-      <button class="d-btn-primary" type="button">
-        <span class="material-symbols-outlined">add</span>
-        New Project
+      <button
+        class="d-btn-primary"
+        type="button"
+        (click)="openProjectPanel()">
+
+        <span class="material-symbols-outlined">
+          add
+        </span>
+
+<h2>
+
+  {{ isEditMode ? 'Edit Project' : 'Create Project' }}
+
+</h2>
       </button>
+
     </div>
+
   </header>
 
-  <!-- Horizontal Stats Toolbar -->
+  <!-- ===========================
+       Statistics
+  ============================ -->
+
   <div class="d-stats-bar">
+
     <div class="d-stat-item">
-      <span class="d-stat-label">Total</span>
-      <strong class="d-stat-value">{{ totalProjects }}</strong>
+
+      <span class="d-stat-label">
+        Total
+      </span>
+
+      <strong class="d-stat-value">
+        {{ totalProjects }}
+      </strong>
+
     </div>
+
     <div class="d-stat-divider"></div>
 
     <div class="d-stat-item">
-      <span class="d-stat-label">Active</span>
-      <strong class="d-stat-value d-status-active">{{ activeProjects }}</strong>
+
+      <span class="d-stat-label">
+        Active
+      </span>
+
+      <strong class="d-stat-value d-status-active">
+        {{ activeProjects }}
+      </strong>
+
     </div>
+
     <div class="d-stat-divider"></div>
 
     <div class="d-stat-item">
-      <span class="d-stat-label">Completed</span>
-      <strong class="d-stat-value d-status-completed">{{ completedProjects }}</strong>
+
+      <span class="d-stat-label">
+        Completed
+      </span>
+
+      <strong class="d-stat-value d-status-completed">
+        {{ completedProjects }}
+      </strong>
+
     </div>
+
     <div class="d-stat-divider"></div>
 
     <div class="d-stat-item">
-      <span class="d-stat-label">Paused</span>
-      <strong class="d-stat-value d-status-paused">{{ pausedProjects }}</strong>
+
+      <span class="d-stat-label">
+        Paused
+      </span>
+
+      <strong class="d-stat-value d-status-paused">
+        {{ pausedProjects }}
+      </strong>
+
     </div>
 
     <div class="d-stats-counter">
-      Projects Loaded: <strong>{{ projects.length }}</strong>
+
+      Projects Loaded :
+
+      <strong>
+        {{ projects.length }}
+      </strong>
+
     </div>
+
   </div>
 
-  <!-- Dynamic Project Cards Grid -->
+  <!-- ===========================
+       Project Cards
+  ============================ -->
+
   <div class="d-card-grid">
-    @for (project of projects; track $index) {
-      <article class="d-card">
-        
-        <div class="d-card-main">
-          <div class="d-icon-wrapper">
-            <span class="material-symbols-outlined">folder</span>
-          </div>
-          
-          <div class="d-card-details">
-            <div class="d-card-title-row">
-              <h3 class="d-card-title">{{ project.name }}</h3>
-              <span class="d-chip">{{ project.status }}</span>
-            </div>
-            <p class="d-card-description">{{ project.description }}</p>
-          </div>
+
+    @for(project of projects; track project._id){
+
+<article
+  class="d-card"
+  (click)="editProject(project)">
+      <div class="d-card-main">
+
+        <div class="d-icon-wrapper">
+
+          <span class="material-symbols-outlined">
+            folder
+          </span>
+
         </div>
 
-        <div class="d-card-footer">
-          <span class="material-symbols-outlined d-date-icon">calendar_today</span>
-          <small class="d-card-date">{{ project.createdAt | date:'dd MMM yyyy' }}</small>
+        <div class="d-card-details">
+
+          <div class="d-card-title-row">
+
+            <h3 class="d-card-title">
+              {{ project.name }}
+            </h3>
+
+            <span class="d-chip">
+              {{ project.status }}
+            </span>
+
+          </div>
+
+          <p class="d-card-description">
+            {{ project.description }}
+          </p>
+
         </div>
 
-      </article>
+      </div>
+
+      <div class="d-card-footer">
+
+        <span class="material-symbols-outlined d-date-icon">
+          calendar_today
+        </span>
+
+        <small class="d-card-date">
+          {{ project.createdAt | date:'dd MMM yyyy' }}
+        </small>
+
+      </div>
+
+    </article>
+
     }
+
   </div>
+
+  <!-- ===========================
+       Create Project Panel
+  ============================ -->
+
+  @if(showProjectPanel){
+
+  <div
+    class="d-project-panel-backdrop"
+    (click)="closeProjectPanel()">
+  </div>
+
+  <div class="d-project-panel">
+
+    <div class="d-project-panel-header">
+
+      <h2>
+        Create Project
+      </h2>
+
+      <button
+        class="d-close-btn"
+        (click)="closeProjectPanel()">
+
+        <span class="material-symbols-outlined">
+          close
+        </span>
+
+      </button>
+
+    </div>
+
+    <div class="d-project-panel-body">
+
+      <label>Project Name</label>
+
+      <input
+        type="text"
+        [(ngModel)]="newProject.name"
+        placeholder="Enter project name" />
+
+      <label>Description</label>
+
+      <textarea
+        rows="5"
+        [(ngModel)]="newProject.description"
+        placeholder="Describe your project">
+      </textarea>
+
+      <label>Status</label>
+
+      <select
+        [(ngModel)]="newProject.status">
+
+        <option value="Active">
+          Active
+        </option>
+
+        <option value="Paused">
+          Paused
+        </option>
+
+        <option value="Completed">
+          Completed
+        </option>
+
+      </select>
+
+    </div>
+
+    <div class="d-project-panel-footer">
+
+    <button
+        class="d-btn-secondary"
+        (click)="closeProjectPanel()">
+
+        Cancel
+
+    </button>
+
+    @if(isEditMode){
+
+    <button
+        class="d-btn-delete"
+        (click)="deleteProject()">
+
+        <span class="material-symbols-outlined">
+
+            delete
+
+        </span>
+
+        Delete
+
+    </button>
+
+    }
+
+    <button
+        class="d-btn-primary"
+        (click)="saveProject()">
+
+        <span class="material-symbols-outlined">
+
+            {{ isEditMode ? 'edit' : 'add' }}
+
+        </span>
+
+        {{ isEditMode ? 'Update Project' : 'Create Project' }}
+
+    </button>
+
+</div>
+
+  </div>
+
+  }
+
+  <!-- ===========================
+       Global Toast
+  ============================ -->
+
+  <app-toast
+    [show]="showToast"
+    [message]="toastMessage"
+    [type]="toastType">
+  </app-toast>
 
 </section>

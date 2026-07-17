@@ -1,0 +1,38 @@
+@if(show){
+
+<div
+    class="d-toast"
+    [class.success]="type==='success'"
+    [class.error]="type==='error'"
+    [class.warning]="type==='warning'"
+    [class.info]="type==='info'">
+
+    <span class="material-symbols-outlined">
+
+        @switch(type){
+
+            @case('success'){
+                check_circle
+            }
+
+            @case('error'){
+                error
+            }
+
+            @case('warning'){
+                warning
+            }
+
+            @default{
+                info
+            }
+
+        }
+
+    </span>
+
+    <span>{{ message }}</span>
+
+</div>
+
+}

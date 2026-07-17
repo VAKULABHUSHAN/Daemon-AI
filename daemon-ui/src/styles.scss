@@ -630,3 +630,205 @@ input {
 .d-card-date {
   font-size: 0.75rem;
 }
+/* ===========================
+   Backdrop
+=========================== */
+
+.d-project-panel-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 12, 22, 0.55);
+  backdrop-filter: blur(3px);
+  z-index: 999;
+}
+
+/* ===========================
+   Panel
+=========================== */
+
+.d-project-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 430px;
+  height: 100vh;
+  background: #1a2235;
+  border-left: 1px solid rgba(255,255,255,0.08);
+  box-shadow: -12px 0 35px rgba(0,0,0,.35);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  animation: slideIn .25s ease;
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.d-project-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.d-project-panel-header h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.d-close-btn {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #cfd8ff;
+  cursor: pointer;
+  transition: .2s;
+  font-size: 18px;
+}
+
+.d-close-btn:hover {
+  background: rgba(255,255,255,.08);
+}
+
+/* ===========================
+   Body
+=========================== */
+
+.d-project-panel-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 24px;
+}
+
+.d-project-panel-body label {
+  color: #cfd8ff;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.d-project-panel-body input,
+.d-project-panel-body textarea,
+.d-project-panel-body select {
+  width: 100%;
+  padding: 12px 14px;
+  background: #111827;
+  color: white;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  outline: none;
+  font-size: 14px;
+  transition: .2s;
+  box-sizing: border-box;
+}
+
+.d-project-panel-body textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.d-project-panel-body input:focus,
+.d-project-panel-body textarea:focus,
+.d-project-panel-body select:focus {
+  border-color: #7c6cff;
+  box-shadow: 0 0 0 3px rgba(124,108,255,.15);
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+.d-project-panel-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 20px 24px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.d-btn-secondary {
+  border: none;
+  background: #2b3448;
+  color: white;
+  padding: 11px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.d-btn-secondary:hover {
+  background: #3b4760;
+}
+
+.d-project-panel-footer .d-btn-primary {
+  padding: 11px 22px;
+}
+
+/* ===========================
+   Animation
+=========================== */
+
+@keyframes slideIn {
+
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+}
+.d-card{
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.d-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.22);
+
+}
+.d-btn-delete{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    background:#dc2626;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 18px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.d-btn-delete:hover{
+
+    background:#b91c1c;
+
+}
