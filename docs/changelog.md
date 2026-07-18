@@ -84,3 +84,44 @@
 - Delete Project
 - Toast Notifications
 - Live Statistics Updates
+
+## v0.3.0 - Day 4 Workspace Engine
+
+### Added
+- Workspace module architecture
+- Workspace MongoDB model
+- Workspace controller
+- Workspace routes
+- Workspace API service in Angular
+- Active workspace management
+- Open Project functionality
+- Workspace persistence using MongoDB
+- Backend APIs for retrieving and updating the active workspace
+
+### Improved
+- Dashboard now consumes backend APIs for:
+  - Workspace statistics
+  - Recent activity
+  - System health
+- Dashboard data loading using RxJS `forkJoin`
+- Project cards now include an **Open** action
+- Toast notification when switching active workspace
+
+### Backend
+- Added `GET /workspace`
+- Added `PUT /workspace/open/:projectId`
+- Automatic workspace document creation on first launch
+- Active project population using MongoDB references
+
+### Frontend
+- Created `WorkspaceService`
+- Connected Projects page with Workspace APIs
+- Integrated workspace switching from the UI
+- Improved project workflow for future AI context support
+
+### Planned
+- Knowledge Management module
+- File & folder import
+- Workspace-specific document storage
+- Local document indexing
+- AI knowledge retrieval pipeline
