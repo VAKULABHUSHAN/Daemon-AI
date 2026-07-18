@@ -1,1 +1,184 @@
-<p>dashboard works!</p>
+<main class="daemon-container">
+  <!-- 1. Hero Banner -->
+  <header class="daemon-hero">
+    <div class="hero-left">
+      <div class="hero-header">
+        <h1 class="hero-title">Good Evening</h1>
+        <span class="hero-hand">👋</span>
+      </div>
+      <h2 class="hero-subtitle">Welcome back to Daemon</h2>
+      <p class="hero-tagline">Build. Chat. Learn. All Local.</p>
+      <p class="hero-description">
+        An isolated, high-performance desktop development workspace engineered for offline-first AI inference, local vector index orchestrations, and context-aware system compilations.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" (click)="onActionClick('New Project')">
+          <i class="bi bi-plus-lg btn-icon"></i> New Project
+        </button>
+        <button class="btn btn-secondary" (click)="onActionClick('AI Chat')">
+          <i class="bi bi-chat-left-dots btn-icon"></i> AI Chat
+        </button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="meta-clock-card">
+        <div class="meta-time-row">
+          <i class="bi bi-clock meta-clock-icon"></i>
+          <span class="meta-time-display">{{ currentTime }}</span>
+        </div>
+        <div class="meta-date-display">{{ currentDate }}</div>
+        <div class="meta-divider"></div>
+        <div class="meta-version-badge">
+          <span class="badge-dot"></span>
+          <span class="badge-label">Daemon Core Environment v0.2.0</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. Workspace Overview -->
+  <section class="dashboard-section">
+    <h3 class="section-title">Workspace Overview</h3>
+    <div class="grid-4-cols">
+      <div class="stat-card">
+        <div class="card-header-row">
+          <span class="stat-label">Projects</span>
+          <i class="bi bi-folder2-open stat-icon"></i>
+        </div>
+        <div class="stat-value">{{ stats.projects }}</div>
+        <div class="stat-subtitle">Active Workspaces</div>
+      </div>
+      <div class="stat-card">
+        <div class="card-header-row">
+          <span class="stat-label">Models</span>
+          <i class="bi bi-cpu stat-icon"></i>
+        </div>
+        <div class="stat-value">{{ stats.models }}</div>
+        <div class="stat-subtitle">Quantized LLMs</div>
+      </div>
+      <div class="stat-card">
+        <div class="card-header-row">
+          <span class="stat-label">Knowledge</span>
+          <i class="bi bi-database-check stat-icon"></i>
+        </div>
+        <div class="stat-value">{{ stats.knowledge }}</div>
+        <div class="stat-subtitle">Active Stores</div>
+      </div>
+      <div class="stat-card">
+        <div class="card-header-row">
+          <span class="stat-label">Chats</span>
+          <i class="bi bi-chat-square-text stat-icon"></i>
+        </div>
+        <div class="stat-value">{{ stats.chats }}</div>
+        <div class="stat-subtitle">Saved Sessions</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Layout Split Columns -->
+  <div class="layout-split-grid">
+    <!-- Left Column -->
+    <div class="column-primary">
+      <!-- 3. Quick Actions -->
+      <section class="dashboard-section">
+        <h3 class="section-title">Quick Actions</h3>
+        <div class="grid-2-cols">
+          @for (action of quickActions; track action.title) {
+            <div class="action-tile" (click)="onActionClick(action.title)">
+              <div class="action-icon-wrapper">
+                <i class="bi {{ action.icon }} action-tile-icon"></i>
+              </div>
+              <div class="action-content">
+                <h4 class="action-title-text">{{ action.title }}</h4>
+                <p class="action-desc-text">{{ action.description }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+
+      <!-- 4. Recent Projects -->
+      <section class="dashboard-section">
+        <h3 class="section-title">Recent Projects</h3>
+        <div class="projects-list-stack">
+          @for (project of recentProjects; track project.name) {
+            <div class="project-row-card">
+              <div class="project-identity">
+                <div class="project-icon-box">
+                  <i class="bi bi-code-square project-meta-icon"></i>
+                </div>
+                <div class="project-details">
+                  <span class="project-name-text">{{ project.name }}</span>
+                  <span class="project-stack-text">Local Workspace Engine Environment</span>
+                </div>
+              </div>
+              <div class="project-meta-aside">
+                <span class="project-timestamp">Updated Today</span>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    </div>
+
+    <!-- Right Column -->
+    <div class="column-secondary">
+      <!-- 5. Recent Activity -->
+      <section class="dashboard-section">
+        <h3 class="section-title">Recent Activity</h3>
+        <div class="timeline-container-card">
+          <div class="timeline-track">
+            @for (event of timeline; track event.title + event.timeframe) {
+              <div class="timeline-item">
+                <div class="timeline-marker">
+                  <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-body">
+                  <div class="timeline-meta-row">
+                    <span class="timeline-event-title">{{ event.title }}</span>
+                    <span class="timeline-timeframe">{{ event.timeframe }}</span>
+                  </div>
+                  <p class="timeline-event-desc">{{ event.description }}</p>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. System Health -->
+      <section class="dashboard-section">
+        <h3 class="section-title">System Health</h3>
+        <div class="health-status-panel">
+          @for (service of services; track service.name) {
+            <div class="health-row">
+              <div class="health-info">
+                <span class="health-service-name">{{ service.name }}</span>
+                <span class="health-service-label">{{ service.label }}</span>
+              </div>
+              <div class="health-indicator-block">
+                <span class="status-glow-dot" [ngClass]="service.status"></span>
+                <span class="status-text-label" [ngClass]="service.status">{{ service.status | uppercase }}</span>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+
+      <!-- 7. Workspace Info -->
+      <section class="dashboard-section">
+        <h3 class="section-title">Workspace Info</h3>
+        <div class="workspace-info-card">
+          <div class="info-matrix-grid">
+            @for (metric of metaMetrics; track metric.label) {
+              <div class="info-matrix-cell">
+                <span class="info-matrix-label">{{ metric.label }}</span>
+                <span class="info-matrix-value">{{ metric.value }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>

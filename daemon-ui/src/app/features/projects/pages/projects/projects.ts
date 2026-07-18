@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Project } from '../../../../core/models/project.model';
 import { ProjectService } from '../../../../core/services/project.service';
 import { ToastComponent } from '../../../../shared/components/toast/toast';
+import { WorkspaceService } from '../../../../core/services/workspace.service';
 
 interface ProjectsResponse {
   data: {
@@ -24,15 +25,17 @@ interface ProjectsResponse {
   templateUrl: './projects.html',
 })
 export class ProjectsComponent implements OnInit {
-
+  
   private projectService = inject(ProjectService);
+  private workspaceService = inject(WorkspaceService);
 
   // ============================
   // Projects
   // ============================
 
   projects: Project[] = [];
-
+  activeWorkspaceId = '';
+  
   totalProjects = 0;
   activeProjects = 0;
   completedProjects = 0;
@@ -70,6 +73,7 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProjects();
+    this.loadWorkspace();
   }
 
   // ============================
@@ -97,7 +101,19 @@ export class ProjectsComponent implements OnInit {
     });
 
   }
+loadWorkspace(): void {
 
+  this.workspaceService.getWorkspace().subscribe({
+
+    next: (res) => {
+
+      this.activeWorkspaceId = res.data.activeProject?._id ?? '';
+
+    }
+
+  });
+
+}
   // ============================
   // Statistics
   // ============================
@@ -333,5 +349,33 @@ deleteProject() {
     }, 3000);
 
   }
+openWorkspace(project: Project): void {
 
+  if (!project._id) return;
+
+  this.workspaceService
+    .openProject(project._id)
+    .subscribe({
+
+      next: () => {
+
+        this.showNotification(
+          `${project.name} is now the active workspace`,
+          'success'
+        );
+      this.activeWorkspaceId = project._id!;
+      },
+
+      error: () => {
+
+        this.showNotification(
+          'Failed to open workspace',
+          'error'
+        );
+
+      }
+
+    });
+
+}
 }

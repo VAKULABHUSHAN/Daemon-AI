@@ -134,6 +134,7 @@
 
 <article
   class="d-card"
+  [class.active-workspace]="project._id === activeWorkspaceId"
   (click)="editProject(project)">
       <div class="d-card-main">
 
@@ -169,15 +170,24 @@
 
       <div class="d-card-footer">
 
-        <span class="material-symbols-outlined d-date-icon">
-          calendar_today
-        </span>
+  <span class="material-symbols-outlined d-date-icon">
+    calendar_today
+  </span>
 
-        <small class="d-card-date">
-          {{ project.createdAt | date:'dd MMM yyyy' }}
-        </small>
+  <small class="d-card-date">
+    {{ project.createdAt | date:'dd MMM yyyy' }}
+  </small>
 
-      </div>
+  <button
+    class="d-btn-primary"
+    style="margin-left:auto"
+    (click)="openWorkspace(project); $event.stopPropagation()">
+
+    Open
+
+  </button>
+
+</div>
 
     </article>
 
