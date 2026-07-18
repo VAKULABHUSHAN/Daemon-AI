@@ -14,11 +14,11 @@ cd daemon-ui
 
 ng serve
 
-## Run API
+## Run Backend
 
-cd daemon-api
+cd daemon-backend
 
-npm start
+npm run start
 
 ## Run Electron
 
