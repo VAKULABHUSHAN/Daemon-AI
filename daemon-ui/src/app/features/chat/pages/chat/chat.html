@@ -78,7 +78,7 @@
 
   <section class="d-chat-conversation" #conversationContainer>
 
-    @for (msg of messages; track $index) {
+    @for (msg of state.messages; track $index) {
 
       <div
         class="d-message"
@@ -117,7 +117,7 @@
 
     }
 
-    @if (isThinking) {
+    @if (state.isThinking) {
 
       <div class="d-message d-ai">
 
@@ -160,17 +160,17 @@
     <textarea
       rows="3"
       placeholder="Ask Daemon anything..."
-      [(ngModel)]="currentMessage"
+      [(ngModel)]="state.currentMessage"
       (keydown)="onKeyDown($event)"
-      [disabled]="isThinking">
+      [disabled]="state.isThinking">
     </textarea>
 
     <button
       class="d-btn-primary"
       (click)="sendMessage()"
-      [disabled]="isThinking">
+      [disabled]="state.isThinking">
 
-      {{ isThinking ? 'Thinking...' : 'Send' }}
+      {{ state.isThinking ? 'Thinking...' : 'Send' }}
 
     </button>
 

@@ -10,11 +10,10 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-interface ChatMessage {
-  role: 'assistant' | 'user';
-  message: string;
-  time: string;
-}
+import { ChatService } from '../../../../core/services/chat.service';
+import {
+  ChatStateService
+} from '../../../../core/services/chat-state.service';
 
 @Component({
   selector: 'app-chat',
@@ -28,32 +27,24 @@ interface ChatMessage {
 export class Chat implements AfterViewInit {
 
   private cdr = inject(ChangeDetectorRef);
-@ViewChild('conversationContainer')
-conversationContainer!: ElementRef<HTMLDivElement>;
 
-  currentMessage = '';
+  private chatService = inject(ChatService);
 
-  isThinking = false;
+  state = inject(ChatStateService);
 
-  messages: ChatMessage[] = [
-    {
-      role: 'assistant',
-      message:
-        "👋 Hello Vakul! I'm Daemon, your local AI development assistant.\n\nWhat are we building today?",
-      time: 'Now'
-    }
-  ];
+  @ViewChild('conversationContainer')
+  conversationContainer!: ElementRef<HTMLDivElement>;
 
   sendMessage(): void {
 
-    if (this.isThinking) return;
+    if (this.state.isThinking) return;
 
-    const text = this.currentMessage.trim();
-
+    const text = this.state.currentMessage.trim();
+this.state.updateTitle(text);
     if (!text) return;
 
-    this.messages = [
-      ...this.messages,
+    this.state.messages = [
+      ...this.state.messages,
       {
         role: 'user',
         message: text,
@@ -61,29 +52,57 @@ conversationContainer!: ElementRef<HTMLDivElement>;
       }
     ];
 
-    this.currentMessage = '';
+    this.state.currentMessage = '';
 
-    this.isThinking = true;
+    this.state.isThinking = true;
 
     this.cdr.detectChanges();
+
     this.scrollToBottom();
-    setTimeout(() => {
 
-      this.messages = [
-        ...this.messages,
-        {
-          role: 'assistant',
-          message:
-            "This is a dummy response. Once we connect Ollama, you'll receive real AI responses here.",
-          time: 'Now'
-        }
-      ];
+    this.chatService.sendMessage(text).subscribe({
 
-      this.isThinking = false;
+      next: (res) => {
 
-      this.cdr.detectChanges();
-      this.scrollToBottom();
-    }, 800);
+        this.state.messages = [
+          ...this.state.messages,
+          {
+            role: 'assistant',
+            message: res.data.response,
+            time: 'Now'
+          }
+        ];
+
+        this.state.isThinking = false;
+
+        this.cdr.detectChanges();
+
+        this.scrollToBottom();
+
+      },
+
+      error: (err) => {
+
+        this.state.messages = [
+          ...this.state.messages,
+          {
+            role: 'assistant',
+            message:
+              err?.error?.message ||
+              '❌ Unable to communicate with Daemon AI.',
+            time: 'Now'
+          }
+        ];
+
+        this.state.isThinking = false;
+
+        this.cdr.detectChanges();
+
+        this.scrollToBottom();
+
+      }
+
+    });
 
   }
 
@@ -101,25 +120,29 @@ conversationContainer!: ElementRef<HTMLDivElement>;
 
   fillPrompt(prompt: string): void {
 
-    this.currentMessage = prompt;
+    this.state.currentMessage = prompt;
 
   }
-ngAfterViewInit(): void {
-  this.scrollToBottom();
-}
 
-private scrollToBottom(): void {
+  ngAfterViewInit(): void {
 
-  setTimeout(() => {
+    this.scrollToBottom();
 
-    if (this.conversationContainer) {
+  }
 
-      this.conversationContainer.nativeElement.scrollTop =
-        this.conversationContainer.nativeElement.scrollHeight;
+  private scrollToBottom(): void {
 
-    }
+    setTimeout(() => {
 
-  });
+      if (this.conversationContainer) {
 
-}
+        this.conversationContainer.nativeElement.scrollTop =
+          this.conversationContainer.nativeElement.scrollHeight;
+
+      }
+
+    });
+
+  }
+
 }

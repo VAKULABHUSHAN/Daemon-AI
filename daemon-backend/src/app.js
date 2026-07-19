@@ -7,6 +7,8 @@ const morgan = require("morgan");
 const projectRoutes = require("./routes/project.routes");
 const dashboardRoutes = require("./routes/dashboard.routes");
 const workspaceRoutes = require("./routes/workspace.routes");
+const chatRoutes = require("./routes/chat.routes");
+
 
 const errorHandler = require("./middleware/errorHandler");
 
@@ -25,7 +27,7 @@ app.use(express.json());
 app.use("/projects", projectRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use("/workspace", workspaceRoutes);
-
+app.use("/chat", chatRoutes);
 // Error handler
 app.use(errorHandler);
 
