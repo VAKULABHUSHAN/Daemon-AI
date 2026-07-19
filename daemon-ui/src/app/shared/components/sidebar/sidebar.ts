@@ -13,10 +13,35 @@ import { RouterModule } from '@angular/router';
 })
 export class SidebarComponent {
   navItems = [
-  { label: 'Dashboard', route: '/dashboard', icon: 'dashboard' },
-  { label: 'Projects', route: '/projects', icon: 'folder' },
-  { label: 'Knowledge', route: '/knowledge', icon: 'library_books' },
-  { label: 'Agents', route: '/agents', icon: 'smart_toy' },
-  { label: 'Settings', route: '/settings', icon: 'settings' }
+  {
+    label: 'Dashboard',
+    route: '/dashboard',
+    icon: 'dashboard'
+  },
+  {
+    label: 'Projects',
+    route: '/projects',
+    icon: 'folder'
+  },
+  {
+    label: 'AI Chat',
+    route: '/chat',
+    icon: 'chat'
+  },
+  {
+    label: 'Knowledge',
+    route: '/knowledge',
+    icon: 'library_books'
+  },
+  {
+    label: 'Agents',
+    route: '/agents',
+    icon: 'smart_toy'
+  },
+  {
+    label: 'Settings',
+    route: '/settings',
+    icon: 'settings'
+  }
 ];
 }

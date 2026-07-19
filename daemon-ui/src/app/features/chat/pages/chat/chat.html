@@ -1,19 +1,179 @@
-<section class="d-panel">
-  <div class="d-panel-header">
-    <div>
-      <p class="d-eyebrow">Workspace</p>
-      <h1>Welcome to Daemon</h1>
-    </div>
-    <div class="d-chip">Local AI Workspace</div>
-  </div>
+<div class="d-chat-page">
 
-  <div class="d-empty-state">
-    <div class="d-empty-illustration">
+  <!-- =========================================
+       QUICK ACTIONS
+  ========================================== -->
+
+  <section class="d-chat-actions">
+
+    <div
+      class="d-chat-action-card"
+      (click)="fillPrompt('Explain the following code:\n\n')">
+
       <span class="material-symbols-outlined">
-chat_bubble_outline
-</span>
+        code
+      </span>
+
+      <h4>Explain Code</h4>
+
+      <p>
+        Understand any code snippet with AI-powered explanations.
+      </p>
+
     </div>
-    <h2>A modern empty state</h2>
-    <p>Bring your prompts, context, and local models together in a calm, focused workspace.</p>
-  </div>
-</section>
+
+    <div
+      class="d-chat-action-card"
+      (click)="fillPrompt('Help me debug the following issue:\n\n')">
+
+      <span class="material-symbols-outlined">
+        bug_report
+      </span>
+
+      <h4>Debug Application</h4>
+
+      <p>
+        Find issues, errors and possible fixes in your application.
+      </p>
+
+    </div>
+
+    <div
+      class="d-chat-action-card"
+      (click)="fillPrompt('Generate an Angular standalone component for:\n\n')">
+
+      <span class="material-symbols-outlined">
+        auto_awesome
+      </span>
+
+      <h4>Generate Component</h4>
+
+      <p>
+        Generate Angular, Flutter or Node.js code in seconds.
+      </p>
+
+    </div>
+
+    <div
+      class="d-chat-action-card"
+      (click)="fillPrompt('Write documentation for the following:\n\n')">
+
+      <span class="material-symbols-outlined">
+        description
+      </span>
+
+      <h4>Write Documentation</h4>
+
+      <p>
+        Create README files, API docs and project documentation.
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- =========================================
+       CONVERSATION
+  ========================================== -->
+
+  <section class="d-chat-conversation" #conversationContainer>
+
+    @for (msg of messages; track $index) {
+
+      <div
+        class="d-message"
+        [class.d-user]="msg.role === 'user'"
+        [class.d-ai]="msg.role === 'assistant'">
+
+        <div class="d-message-avatar">
+
+          {{ msg.role === 'assistant' ? 'D' : 'V' }}
+
+        </div>
+
+        <div class="d-message-body">
+
+          <div class="d-message-role">
+
+            {{ msg.role === 'assistant' ? 'Daemon' : 'You' }}
+
+          </div>
+
+          <div class="d-message-text">
+
+            {{ msg.message }}
+
+          </div>
+
+          <div class="d-message-time">
+
+            {{ msg.time }}
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+    @if (isThinking) {
+
+      <div class="d-message d-ai">
+
+        <div class="d-message-avatar">
+
+          D
+
+        </div>
+
+        <div class="d-message-body">
+
+          <div class="d-message-role">
+
+            Daemon
+
+          </div>
+
+          <div class="d-message-text">
+
+            <span class="d-thinking"></span>
+
+            Daemon is thinking...
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+  </section>
+
+  <!-- =========================================
+       INPUT
+  ========================================== -->
+
+  <footer class="d-chat-input">
+
+    <textarea
+      rows="3"
+      placeholder="Ask Daemon anything..."
+      [(ngModel)]="currentMessage"
+      (keydown)="onKeyDown($event)"
+      [disabled]="isThinking">
+    </textarea>
+
+    <button
+      class="d-btn-primary"
+      (click)="sendMessage()"
+      [disabled]="isThinking">
+
+      {{ isThinking ? 'Thinking...' : 'Send' }}
+
+    </button>
+
+  </footer>
+
+</div>
