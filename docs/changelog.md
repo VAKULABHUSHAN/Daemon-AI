@@ -85,7 +85,7 @@
 - Toast Notifications
 - Live Statistics Updates
 
-## v0.3.0 - Day 4 Workspace Engine
+## v0.4.0 - Day 4 Workspace Engine
 
 ### Added
 - Workspace module architecture
@@ -125,3 +125,41 @@
 - Workspace-specific document storage
 - Local document indexing
 - AI knowledge retrieval pipeline
+
+# v0.5.0 - Day 5 AI Chat Integration
+
+## Added
+
+- AI Chat page UI
+- Quick action prompt cards
+- ChatService for backend communication
+- ChatStateService for state management
+- Conversation model
+- Automatic conversation title generation
+- AI thinking indicator
+- Auto-scroll to latest message
+- Enter-to-send keyboard shortcut
+- Environment-based API configuration
+- Real-time communication with Ollama
+
+## Improved
+
+- Refactored chat architecture
+- Separated UI state from API communication
+- Centralized API endpoint management
+- Improved code organization for future multi-chat support
+
+## Backend
+
+- Added Chat API endpoint
+- Added Ollama service integration
+- Connected Express backend with local Ollama instance
+
+## Status
+
+✅ Angular ↔ Express ↔ Ollama communication working successfully.
+
+Next milestone:
+- Multi-conversation support
+- Conversation persistence
+- Project Context Engine
