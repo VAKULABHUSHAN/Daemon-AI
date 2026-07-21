@@ -8,6 +8,8 @@ const projectRoutes = require("./routes/project.routes");
 const dashboardRoutes = require("./routes/dashboard.routes");
 const workspaceRoutes = require("./routes/workspace.routes");
 const chatRoutes = require("./routes/chat.routes");
+const conversationRoutes = require("./routes/conversation.routes");
+const messageRoutes = require("./routes/message.routes");
 
 
 const errorHandler = require("./middleware/errorHandler");
@@ -28,6 +30,10 @@ app.use("/projects", projectRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use("/workspace", workspaceRoutes);
 app.use("/chat", chatRoutes);
+app.use("/conversations", conversationRoutes);
+app.use("/messages", messageRoutes);
+
+
 // Error handler
 app.use(errorHandler);
 
