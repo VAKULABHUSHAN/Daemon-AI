@@ -163,3 +163,57 @@ Next milestone:
 - Multi-conversation support
 - Conversation persistence
 - Project Context Engine
+
+
+# v0.6.0 - Day 6 Conversation Engine
+
+## Added
+
+- Conversation MongoDB model
+- Message MongoDB model
+- Conversation CRUD APIs
+- Message CRUD APIs
+- Conversation and Message controllers
+- Conversation and Message routes
+- Persistent conversation storage
+- Persistent message storage
+- Multi-conversation backend support
+
+## Improved
+
+- Refactored Chat API to use conversation-based workflow
+- Integrated Ollama Chat API (`/api/chat`) for multi-turn conversations
+- Added conversation history support for contextual AI responses
+- Automatic conversation creation for new chats
+- Automatic message persistence for both user and AI responses
+- Conversation sorting using `updatedAt`
+
+## Fixed
+
+- Enabled context-aware AI conversations
+- Added cascade deletion of messages when deleting a conversation
+- Improved backend architecture for future streaming and memory features
+
+## Tested
+
+- Create Conversation
+- Get All Conversations
+- Get Conversation By ID
+- Delete Conversation
+- Create Message
+- Get Messages
+- Delete Message
+- New Chat API
+- Existing Conversation API
+- Context-aware multi-turn conversations
+
+## Next Goal
+
+- Build Angular Conversation Service
+- Create Conversation and Message models in Angular
+- Implement conversation sidebar
+- Add New Chat functionality
+- Load and switch between conversations
+- Display persisted chat history
+- Connect frontend with Conversation Engine APIs
+- Complete end-to-end multi-conversation workflow
