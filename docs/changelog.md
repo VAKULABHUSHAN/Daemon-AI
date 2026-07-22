@@ -217,3 +217,48 @@ Next milestone:
 - Display persisted chat history
 - Connect frontend with Conversation Engine APIs
 - Complete end-to-end multi-conversation workflow
+
+# v0.7.0 - Day 7 Chat Architecture Refactor (In Progress)
+
+## Added
+
+- Refactored Chat module structure
+- Created separated chat components:
+  - Chat Header
+  - Chat Window
+  - Conversation Sidebar
+- Prepared Angular architecture for conversation-based workflow
+
+## Improved
+
+- Started migration from single chat flow to conversation-based architecture
+- Improved component separation
+- Prepared frontend structure for persistent conversations
+
+## Fixed
+
+- Fixed initial chat component organization issues
+- Improved folder structure for future chat features
+
+## Known Issues
+
+- Chat UI is not receiving AI responses
+- Conversation API integration is incomplete
+- Message persistence is not connected to frontend
+- Sidebar conversation loading is not functional
+- End-to-end chat workflow needs restoration
+
+## Current Status
+
+⚠️ Chat system is under refactor.
+
+Backend conversation engine is available,
+but frontend chat response flow is currently broken.
+
+## Next Goal
+
+- Restore working AI chat response flow
+- Connect ChatService with new conversation APIs
+- Verify Angular → Express → Ollama → Angular pipeline
+- Complete conversation switching
+- Restore stable chat experience
