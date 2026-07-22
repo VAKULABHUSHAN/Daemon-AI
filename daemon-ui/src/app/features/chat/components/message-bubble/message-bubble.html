@@ -1,0 +1,30 @@
+<div
+    class="d-message"
+    [class.user]="message.role === 'user'"
+    [class.assistant]="message.role === 'assistant'">
+
+    <div
+        class="d-message-avatar"
+        *ngIf="message.role === 'assistant'">
+
+        D
+
+    </div>
+
+    <div class="d-message-content">
+
+        <div class="d-message-author">
+
+            {{ message.role === 'user' ? 'You' : 'Daemon' }}
+
+        </div>
+
+        <div class="d-message-text">
+
+            {{ message.content }}
+
+        </div>
+
+    </div>
+
+</div>

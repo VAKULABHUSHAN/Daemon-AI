@@ -1,0 +1,27 @@
+<app-chat-header></app-chat-header>
+
+<div class="d-chat-body">
+
+    @if (hasMessages) {
+
+        <app-chat-messages></app-chat-messages>
+
+    } @else {
+
+        <app-empty-state></app-empty-state>
+
+    }
+
+</div>
+
+<div class="d-chat-footer">
+
+    @if (!hasMessages) {
+
+        <app-quick-actions></app-quick-actions>
+
+    }
+
+    <app-chat-input></app-chat-input>
+
+</div>

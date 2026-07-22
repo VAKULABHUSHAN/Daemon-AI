@@ -5,10 +5,21 @@ export const API = {
 };
 
 export const API_ENDPOINTS = {
+
   DASHBOARD: '/dashboard',
+
   PROJECTS: '/projects',
+
   CHAT: '/chat',
+
+  CONVERSATIONS: '/conversations',
+
+  MESSAGES: '/messages',
+
   KNOWLEDGE: '/knowledge',
+
   AGENTS: '/agents',
+
   SETTINGS: '/settings',
+
 };

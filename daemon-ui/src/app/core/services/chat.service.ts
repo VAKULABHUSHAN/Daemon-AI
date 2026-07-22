@@ -8,6 +8,7 @@ interface ChatResponse {
   success: boolean;
   message: string;
   data: {
+    conversationId: string;
     response: string;
   };
 }
@@ -19,15 +20,19 @@ export class ChatService {
 
   private http = inject(HttpClient);
 
-  sendMessage(message: string): Observable<ChatResponse> {
+  sendMessage(
+  message: string,
+  conversationId?: string
+): Observable<ChatResponse> {
 
-    return this.http.post<ChatResponse>(
-      API.BASE_URL + API_ENDPOINTS.CHAT,
-      {
-        message
-      }
-    );
+  return this.http.post<ChatResponse>(
+    API.BASE_URL + API_ENDPOINTS.CHAT,
+    {
+      message,
+      conversationId
+    }
+  );
 
-  }
+}
 
 }

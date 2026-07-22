@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { PROJECT_STATUS } = require("../utils/constants");
+
 const projectSchema = new mongoose.Schema(
   {
     name: {
@@ -14,11 +15,38 @@ const projectSchema = new mongoose.Schema(
       trim: true,
     },
 
+    path: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    projectContext: {
+      structure: {
+        type: Array,
+        default: [],
+      },
+
+      files: {
+        type: Array,
+        default: [],
+      },
+
+      summary: {
+        type: String,
+        default: "",
+      },
+
+      scannedAt: {
+        type: Date,
+      },
+    },
+
     status: {
-  type: String,
-  enum: Object.values(PROJECT_STATUS),
-  default: PROJECT_STATUS.ACTIVE,
-},
+      type: String,
+      enum: Object.values(PROJECT_STATUS),
+      default: PROJECT_STATUS.ACTIVE,
+    },
   },
   {
     timestamps: true,

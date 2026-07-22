@@ -1,0 +1,17 @@
+<div class="d-conversation-list">
+
+    <div
+        class="d-conversation-item"
+        *ngFor="let conversation of conversations">
+
+        <div class="d-conversation-title">
+            {{ conversation.title }}
+        </div>
+
+        <div class="d-conversation-time">
+            {{ conversation.updatedAt | date:'short' }}
+        </div>
+
+    </div>
+
+</div>
